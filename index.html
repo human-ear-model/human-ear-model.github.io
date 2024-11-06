@@ -1,0 +1,50 @@
+<html>
+<head>
+
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+
+<style>
+    model-viewer{
+        height: inherit;
+        width: inherit;
+    }
+</style>
+</head>
+
+<body>
+<div style="height: 100vh; width: 100vw;">
+    <h1>FISAYO EAR MODEL</h1>
+    <model-viewer id="blendViewer" camera-controls touch-action="pan-y" ar src="anatomy_of_the_inner_ear.glb" alt="A 3D model of an astronaut">
+        <effect-composer render-mode="quality" msaa="8">
+            <color-grade-effect contrast="0.5" saturation="-1" opacity="1" blend-mode="default"></color-grade-effect>
+        </effect-composer>
+        <div class="controls">
+            <label for="opacity">Opacity</label>
+            <input id="opacity" type="range" min="0" max="1" step="0.01" value="1">
+            <label for="blend-mode">Blend Mode:</label>
+            <select id="blend-mode">
+                <option value="default">Default</option>
+                <option value="skip">Skip</option>
+                <option value="add">Add</option>
+                <option value="subtract">Subtract</option>
+                <option value="divide">Divide</option>
+                <option value="negation">Negation</option>
+            </select>
+        </div>
+    </model-viewer>
+</div>
+
+</body>
+
+
+
+<script type="module">
+    const blendViewer = document.querySelector("model-viewer#blendViewer");
+    const blendEffect = blendViewer.querySelector('color-grade-effect');
+    const opacity = blendViewer.querySelector('#opacity');
+    const mode = blendViewer.querySelector('#blend-mode');
+
+    opacity.addEventListener('input', (e) => blendEffect.opacity = e.target.value);
+    mode.addEventListener('change', (e) => blendEffect.blendMode = e.target.value);
+</script>
+</html>
